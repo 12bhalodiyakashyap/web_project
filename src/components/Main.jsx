@@ -6,28 +6,31 @@ import Sidebar from './Sidebar';
 import { Link } from '@reach/router';
 
 const Main = () => {
-    const [heroData, setHeroData] = useState(null);
     const [fData, setFData] = useState([]);
     const [cData, setCData] = useState([]);
     const [uData, setUData] = useState([]);
+    const [hData, setHData] = useState({});
 
     useEffect(() => {
-        const storedHeroData = JSON.parse(localStorage.getItem('heroData')); // Retrieve heroData from localStorage
-        if (storedHeroData) {
-            setHeroData(storedHeroData); // Update state with heroData
-            console.log(storedHeroData);
-        }
         const storedFeaturedData = JSON.parse(localStorage.getItem('featuredData'));
         if (storedFeaturedData) {
             setFData(storedFeaturedData);
         }
+
         const storedCardData = JSON.parse(localStorage.getItem('cardData'));
         if (storedCardData) {
             setCData(storedCardData);
         }
+
         const storedUserData = JSON.parse(localStorage.getItem('userData'));
         if (storedUserData) {
             setUData(storedUserData);
+        }
+
+        const storedHData = JSON.parse(localStorage.getItem('heroData'));
+        if (storedHData) {
+            setHData(storedHData);
+            console.warn(hData);
         }
     }, []);
 
@@ -35,14 +38,31 @@ const Main = () => {
         <div className='container mx-[80px] md:mx-auto'>
             <Sidebar />
             <Link to="/main" className="text-white text-xl font-semibold mr-4"></Link>     
-            {heroData ? (
-          <div>
-            <img src={heroData.authorImg} alt="Author" />
-            <p>Name: {heroData.authorText}</p>
-            <p>Bio: {heroData.category}</p>
-          </div>
-        ) : (
-          <p>No data found in localStorage.</p>)}
+            <div className='container mx-auto mt-24'>
+                <div className=''>
+                    {Object.entries(hData).map(([key, data], index) => (
+                        <div key={index} className='bg-white flex gap-10 shadow mt-10 p-3 rounded'>
+                            <div>
+                                <img src={data.imageSrc} alt={data.title}/>
+                            </div>
+                            <div>
+                            <div className='flex flex-col gap-8 mt-10'>
+                            <h2 className='bg-purple-100 rounded-xl w-[90px] text-purple-700 text-center md:text-left p-1 m-2 md:m-0'>{data.category}</h2>
+
+                                <h2 className='font-bold text-xl'>{data.title}</h2>
+                                
+                                <p className='text-gray-600'>{data.content}</p>
+                                <div className='flex'>
+                                <img className='w-[30px]' src={data.authorImg} alt={data.title} />
+                                <p className='text-gray-600'>{data.authorText}</p>
+                                </div>
+
+                            </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
             <div className='container mx-auto flex flex-col md:flex-row gap-20 mt-10'>
                 {fData.map((feature, index) => (
                     <div key={index} className='bg-white flex flex-col md:flex-row gap-3 shadow mt-10 p-3 rounded'>
@@ -59,6 +79,8 @@ const Main = () => {
                     </div>
                 ))}
             </div>
+
+           
 
             {/* Browse by Category Section */}
             <div className='container mx-auto mt-24 text-center'>
