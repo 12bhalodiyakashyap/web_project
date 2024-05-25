@@ -80,8 +80,6 @@ const Main = () => {
                 ))}
             </div>
 
-           
-
             {/* Browse by Category Section */}
             <div className='container mx-auto mt-24 text-center'>
                 <div className='flex flex-col'>
@@ -149,12 +147,11 @@ const Main = () => {
                 </div>
             </div>
 
-            {/* Subscribe Section */}
             <div className='bg-gray-100 w-full mt-20'>
                 <div className='container mx-auto flex flex-col md:flex-row items-center p-4'>
                     <div className='md:w-1/2 '>
                         <h2 className='font-bold text-2xl'>Subscribe to Newsletter</h2>
-                        <p className='text-gray-500 mt-3'>Provide your email to get email notifications when we launch new products or publish new articles.</p>
+                        <p className='text-gray-500 mt-3'>Provide your email</p>
                     </div>
                     <div className='mt-4 md:mt-0 md:w-1/2 flex flex-col md:flex-row items-center md:ml-60'>
                         <input type="email" placeholder='Enter your Email' className='border pl-4 md:pl-6 py-3 rounded m-4 md:w-auto' />
@@ -163,7 +160,6 @@ const Main = () => {
                 </div>
             </div>
 
-            {/* Footer Section */}
             <div className='m-10'>
                 <div className='container mx-auto flex flex-col md:flex-row justify-between items-center'>
                     <p className='text-gray-500 mb-4 md:mb-0'>
